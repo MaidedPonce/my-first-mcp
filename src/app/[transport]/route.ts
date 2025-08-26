@@ -1,5 +1,5 @@
 import { createMcpHandler } from '@vercel/mcp-adapter'
-import z from 'zod'
+import { z } from 'zod'
 
 const handler = createMcpHandler(
   (server) => {
@@ -23,7 +23,18 @@ const handler = createMcpHandler(
   },
   {
     capabilities: {
-      tools: {},
+      tools: {
+        fetchWeather: {
+          description: 'Tool to fetch the weather of a city',
+          parameters: {
+            city: {
+              type: 'string',
+              description: 'City name',
+            },
+          },
+          required: ['city'],
+        },
+      },
     },
   },
   {
