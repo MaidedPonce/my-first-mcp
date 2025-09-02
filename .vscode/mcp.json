@@ -1,0 +1,10 @@
+{
+	"servers": {
+		"my-mcp-server-9eee76fa": {
+			"type": "stdio",
+			"command": "https://my-first-mcp.vercel.app/mcp",
+			"args": []
+		}
+	},
+	"inputs": []
+}

@@ -10,11 +10,30 @@ const handler = createMcpHandler(
         city: z.string().describe('City name'), // parametros
       },
       async ({ city }) => {
+        const response = await fetch(
+          `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1&language=en&format=json`
+        )
+        const data = await response.json()
+        if (data.length === 0) {
+          return {
+            content: [
+              {
+                type: 'text',
+                text: `No se encontraron datos para la ciudad: ${city}`,
+              },
+            ],
+          }
+        }
+        const { latitude, longitude } = data.results[0]
+        const weatherResponse = await fetch(
+          `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m`
+        )
+        const weatherData = await weatherResponse.json()
         return {
           content: [
             {
               type: 'text',
-              text: `The weather in ${city} is sunny with a high of 25°C and a low of 15°C.`,
+              text: JSON.stringify(weatherData, null, 2),
             },
           ],
         }
