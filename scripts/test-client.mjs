@@ -1,7 +1,7 @@
 import { Client } from "@modelcontextprotocol/sdk/client/index.js";
 import { SSEClientTransport } from "@modelcontextprotocol/sdk/client/sse.js";
 
-const origin = process.argv[2] || "https://my-first-mcp.vercel.app";
+const origin = "https://my-first-mcp.vercel.app";
 
 async function main() {
   try {
