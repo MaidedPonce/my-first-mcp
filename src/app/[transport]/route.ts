@@ -2,7 +2,7 @@ import { createMcpHandler } from '@vercel/mcp-adapter'
 import { z } from 'zod'
 
 const handler = createMcpHandler(
-  (server) => {
+  async (server) => {
     server.tool(
       'fetch-weather', // titulo
       'Tool to fetch the weather of a city', // descripcion
